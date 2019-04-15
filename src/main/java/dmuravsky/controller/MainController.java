@@ -28,7 +28,7 @@ public class MainController {
         return "add";
     }
 
-    @PostMapping(value = "/addSave")
+    @PostMapping(value = "/add")
     public String addUser(@RequestParam("name") String name,
                           @RequestParam("login") String login,
                           @RequestParam("pass") String password) {
@@ -37,29 +37,29 @@ public class MainController {
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/delete{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable int id, Model model) {
         User user = userService.getOne(id);
         model.addAttribute("name", user.getName());
         model.addAttribute("id", user.getId());
-        return "delete";
+        return "/delete";
     }
 
-    @PostMapping(value = "/deleteSave")
+    @PostMapping(value = "/delete/")
     public String deleteUserSave(@RequestParam("id") int id) {
         User user = userService.getOne(id);
         userService.deleteUser(user);
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/edit{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editUser(@PathVariable("id") int id, Model model) {
         User user = userService.getOne(id);
         model.addAttribute("user", user);
-        return "edit";
+        return "/edit";
     }
 
-    @PostMapping("/editSave")
+    @PostMapping("/edit/")
     public String editUserSave(@RequestParam("id") int id,
                                @RequestParam("name") String name,
                                @RequestParam("login") String login,

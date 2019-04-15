@@ -2,11 +2,13 @@ package dmuravsky.dao.impl;
 
 import dmuravsky.dao.UserDAO;
 import dmuravsky.model.User;
+import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -37,22 +39,20 @@ public class JpaUserDAOImpl implements UserDAO {
     @Override
     @Transactional
     public void deleteUser(User user) {
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+        Query query = entityManager.createNativeQuery("DELETE FROM user WHERE id=?");
+        query.setParameter(1, user.getId());
+        query.executeUpdate();
     }
 
     @Override
     public User getOne(int id) {
-        //TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id = :id", User.class);
-        //query.setParameter("id", id);
-        //User user = query.getResultList().stream().findAny().orElse(null);
         return entityManager.find(User.class, id);
     }
 
     @Override
     public User getOne(String login) {
-        //TypedQuery<User> query = entityManager.createQuery("select u from User u where u.login = :login", User.class);
-        //query.setParameter("login", login);
-        //return query.getResultList().stream().findAny().orElse(null);
-        return entityManager.find(User.class, login);
+        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.login = :login", User.class);
+        query.setParameter("login", login);
+        return query.getResultList().stream().findAny().orElse(null);
     }
 }
