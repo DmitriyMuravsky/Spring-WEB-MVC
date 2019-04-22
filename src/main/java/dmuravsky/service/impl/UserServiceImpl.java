@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public List<User> getAll() {
-        return userDAO.getAll();
+    public List<User> getAllUsers() {
+        return userDAO.getAllUsers();
     }
 
     @Override
@@ -35,12 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getOne(int id) {
-        return userDAO.getOne(id);
+    public User getOneUserById(int id) {
+        return userDAO.getOneUserById(id);
     }
 
     @Override
-    public User getOne(String login) {
-        return userDAO.getOne(login);
+    public User getOneUserByLogin(String login) {
+        return userDAO.getOneUserByLogin(login);
     }
 }

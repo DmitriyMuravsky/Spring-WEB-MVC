@@ -11,10 +11,15 @@
     <title>Add user</title>
 </head>
 <body>
-    <form action="/add" method="post">
+    <form action="/admin/add" method="post">
         <input type="text" name="name" placeholder="name">
         <input type="text" name="login" placeholder="login">
         <input type="text" name="pass" placeholder="password">
+        <select name="role">
+            <option>admin</option>
+            <option>user</option>
+            <option>guest</option>
+        </select>
         <input type="submit" value="Добавить">
     </form>
 </body>

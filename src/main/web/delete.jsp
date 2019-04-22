@@ -12,7 +12,7 @@
 </head>
 <body>
     <p>Вы действительно хотите удалить пользователя ${name} ?</p>
-    <form action="/delete/" method="post">
+    <form action="/admin/delete/" method="post">
         <input type="hidden" name="id" value="${id}">
         <input type="submit" value="Удалить">
     </form>

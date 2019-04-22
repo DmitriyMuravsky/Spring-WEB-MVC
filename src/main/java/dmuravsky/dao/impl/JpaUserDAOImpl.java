@@ -20,7 +20,7 @@ public class JpaUserDAOImpl implements UserDAO {
     private EntityManager entityManager;
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
@@ -45,14 +45,19 @@ public class JpaUserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getOne(int id) {
+    public User getOneUserById(int id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public User getOne(String login) {
-        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.login = :login", User.class);
-        query.setParameter("login", login);
-        return query.getResultList().stream().findAny().orElse(null);
+    public User getOneUserByLogin(String login) {
+        try {
+            TypedQuery<User> query = entityManager.createQuery("select u from User u where u.login = :login", User.class);
+            query.setParameter("login", login);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }

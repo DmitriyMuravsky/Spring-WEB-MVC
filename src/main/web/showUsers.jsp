@@ -18,6 +18,7 @@
             <td>Name</td>
             <td>Login</td>
             <td>Pass</td>
+            <td>Role</td>
             <td colspan="2">Action</td>
         </tr>
     <c:forEach var="user" items="${users}">
@@ -26,13 +27,19 @@
             <td>${user.name}</td>
             <td>${user.login}</td>
             <td>${user.password}</td>
-            <td><a href="/edit/${user.id}">Edit</a></td>
-            <td><a href="/delete/${user.id}">Delete</a></td>
+    <c:forEach var="role" items="${user.roles}">
+            <td>${role.name}</td>
+    </c:forEach>
+            <td><a href="/admin/edit/${user.id}">Edit</a></td>
+            <td><a href="/admin/delete/${user.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
-    <a href="/add">
+    <a href="/admin/add">
         <input type="submit" value="Добавить нового пользователя">
+    </a>
+    <a href="/logout">
+        <input type="submit" value="Выход">
     </a>
 
 </body>

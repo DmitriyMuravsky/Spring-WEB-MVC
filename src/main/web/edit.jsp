@@ -11,11 +11,16 @@
     <title>Edit user</title>
 </head>
 <body>
-<form action="/edit/" method="post">
+<form action="/admin/edit/" method="post">
     <input type="hidden" name = "id" value="${user.id}">
     <input type="text" name="name" value="${user.name}" placeholder="Введите имя">
     <input type="text" name="login" value="${user.login}" placeholder="Введите логин">
-    <input type="text" name="pass" value="${user.password}" placeholder="Введите пароль">
+    <input type="text" name="password" value="${user.password}" placeholder="Введите пароль">
+    <select name="role">
+        <option>admin</option>
+        <option>user</option>
+        <option>guest</option>
+    </select>
     <input type="submit" value="Обновить">
 </form>
 </body>
